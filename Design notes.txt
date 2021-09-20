@@ -1,0 +1,34 @@
+Okay, this is more for me than for anybody else.  I want to capture what I have learned and what steps I worked through to get here.
+
+SQL Side:
+	This was nice.  Once I installed SQL Server I was able to create the tables which were based directly on the provided data structure.  As I worked it, I remembered things I haven't had to use in years.  I ended up changing the table names at the end, and while it shouldn't matter, after I did it, I realized it created a level of disconnect between the initial data structure and the stored data.  This is not a problem for people who know what is going on, but it will create more headaches for anybody having to follow up.
+	
+	Also I really should have named the Address table Addresses, just so you wouldn't have to reference it like [Addresss] in the code and in SQL scripts.  But at this point I didn't feel like going back and adding to the mess.
+	
+	One thing that stood out was remembering that you had to change the SQL Server settings after initial installation to allow both Windows and SQL Authorization.  Forgetting to do this led to the first major bump in the work.
+	
+API Side:
+	Yeah, the tutorials that are quick reads actually suck.  Each one has some gems to them, but over all, most of them just caused more headaches then they were worth.  Why was I looking at Tutorials?  Because this was the first time in almost 4 years that I was trying to create an API.  Last time I took an exsiting one and converted it over to what I needed for the project.  That was a lot easier and turned out a lot better.
+	
+	There are more than one solutions in play here.  API_Sample2 is the good API.  This one is working along the lines of what is expected of an API.  MS3_API_Sample was where all the ground work and experimentation took place.  This is where I worked out the Data Access Layer, which quite honestly was fun.  That is the kind of stuff I am very good at and enjoy.
+	
+	There is a Unit Test project in MS3_API_Sample with a class specifically for the DAL class.  My big regret is that it is wired to interface directly with my database and doesn't use impersonation and mock connections to actually test with.  This means that garbage is going to get into my database, but it also means I have test data to play with.
+	
+	This is the second place I figure there are going to have problems with.  Because I renamed the classes to be more in sync wth the database (good in my mind, but bad against the supplied data structure).  At this point I am just going to run with it.
+	
+	My CRUD access routines work great.  I am happy with them, though wouldn't mind fine tuning the DAL class to be more elegant.  But that is always the way it is.
+	
+	API_Sample2 is the functioning API and you can actually call the Get processes and they work as expected.  They return the class structure I created which is where the first big negative is shown.  My output doesn't match the supplied input.  If I wasn't fighting with everything else, I would go back and fix it but I am not going to now.
+	
+	I have not reached the point where I can test the Post and Put functions.  I should be able to wire in the Delete with no trouble.  I can't explain why this one works but the initial one I created wouldn't behave like an API.  This is where I need to learn more.
+	
+	GUI Side:
+		Originally I was going to have the GUI in a different project in the same solution.  That didn't work out so well.  I don't think my laptop is really up to running Visual Studio.  It is slow on the build and debug process.  But I can run the GUI project and consume the running API Project.
+
+		Good news, I have the GUI with a list of all the entered values.  it allows you to see the details which includes the multiple Addresses and contacts.  It will also delete a client correctly.
+		
+		There is an edit page which will allow you to change the base data in the Client record, but it doesn't cover the Addresses or Contacts which are multiple records.
+		
+		I also need to write a Create/New client GUI page.
+		
+		BUT, the API saved as expected and that was all the GUI is really for, testing the API in the wild.
