@@ -1,0 +1,81 @@
+﻿@model MS3_GUI.Models.Identification
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    table th,
+    table td { padding-inline-end:25px; }
+</style>
+
+<h2>Details</h2>
+
+<p>@Html.ActionLink("View Client List","Index")</p>
+
+<div>
+    <table>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.Title) </th>
+            <th>@Html.DisplayNameFor(m => m.FirstName) </th>
+            <th>@Html.DisplayNameFor(m => m.LastName) </th>
+            <th>@Html.DisplayNameFor(m => m.DOB) </th>
+            <th>@Html.DisplayNameFor(m => m.Gender) </th>
+        </tr>
+        <tr>
+            <td>@Model.Title</td>
+            <td>@Model.FirstName</td>
+            <td>@Model.LastName</td>
+            <td>@Model.DOB.Value.ToShortDateString()</td>
+            <td>@Model.Gender</td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <th>Addresses</th>
+        </tr>
+        <tr>
+            <th>Type </th>
+            <th>Number </th>
+            <th>Street </th>
+            <th>Unit </th>
+            <th>City </th>
+            <th>State </th>
+            <th>Zip Code </th>
+        </tr>
+
+        @foreach (var c in Model.Address)
+        {
+            <tr>
+                <td>@c.Type</td>
+                <td>@c.Number</td>
+                <td>@c.Street</td>
+                <td>@c.Unit</td>
+                <td>@c.City</td>
+                <td>@c.State</td>
+                <td>@c.ZipCode</td>
+            </tr>
+        }
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <th>Contact Methods</th>
+        </tr>
+        <tr>
+            <th>Type </th>
+            <th>Value </th>
+            <th>Preferred </th>
+        </tr>
+
+        @foreach (var cc in Model.Communication)
+        {
+            <tr>
+                <td>@cc.Type</td>
+                <td>@cc.Value</td>
+                <td>@cc.Preferred</td>
+            </tr>
+        }
+
+    </table>
+
+</div>
+
+

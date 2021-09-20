@@ -1,0 +1,40 @@
+﻿
+@model List<MS3_GUI.Models.Identification> 
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="row">
+    <b>Clients</b>
+
+    <table class="table table-bordered table-responsive table-hover">
+        <tr>
+            <th>PKID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>DOB</th>
+            <th>Gender</th>
+            <th>Title</th>
+            <th></th>
+        </tr>
+        @foreach (var c in Model)
+            {
+                <tr>
+                    <td>@c.PkId</td>
+                    <td>@c.FirstName</td>
+                    <td>@c.LastName</td>
+                    <td>@c.DOB</td>
+                    <td>@c.Gender</td>
+                    <td>@c.Title</td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { @id = c.PkId })
+                        &nbsp; @Html.ActionLink("Edit", "Edit", new { @id = c.PkId }),
+                        &nbsp; @Html.ActionLink("Delete", "Delete", new { @id = c.PkId }, new { onclick = "return confirm('Are you sure you want to delete this client?');" })
+                    </td>
+                </tr>
+            }
+
+    </table>
+</div>
